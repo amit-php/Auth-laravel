@@ -40,7 +40,7 @@
     <div class="sidebar">
         <h3 class="text-center text-white">My Dashboard</h3>
         <a href="#home">Home</a>
-        <a href="#profile">Profile</a>
+        <a href="{{route('type.index')}}">Add Category</a>
         <a href="#messages">Messages</a>
         <a href="#settings">Settings</a>
         <a><form action="{{ route('logout') }}" method="POST">
@@ -75,6 +75,21 @@
                 </div>
             </div>
         </nav>
+        @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+      <!-- Display success message -->
+      @if (session('success'))
+      <div class="alert alert-success">
+          {{ session('success') }}
+      </div>
+  @endif
       {{$slot}}
     </div>
 
