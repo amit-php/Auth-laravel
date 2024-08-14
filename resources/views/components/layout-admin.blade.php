@@ -42,6 +42,7 @@
         <a href="{{route('expense.index')}}">Expenses</a>
         <a href="{{route('type.index')}}">Expense Category</a>
         <a href="{{route('expense.create')}}">Add Expense</a>
+        <a href="{{route('income.create')}}">Add Income</a>
         <a href="#settings">Settings</a>
         <a><form action="{{ route('logout') }}" method="POST">
             @csrf
@@ -51,7 +52,7 @@
 
     <!-- Main Content -->
     <div class="main-content">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        {{-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
                 <a class="navbar-brand" href="{{route('home')}}">Dashboard</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -74,7 +75,7 @@
                     </ul>
                 </div>
             </div>
-        </nav>
+        </nav> --}}
         @if ($errors->any())
         <div class="alert alert-danger">
             <ul>

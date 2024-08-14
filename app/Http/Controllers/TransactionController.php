@@ -14,7 +14,7 @@ class TransactionController extends Controller
      */
     public function index()
     {
-       $user_Id = Auth::id();
+        $user_Id = Auth::id();
         $transactions = Transaction::with('category')->where('user_id','=',$user_Id)->get();
         return view('admin.expense_list',compact('transactions')); 
     }
@@ -41,7 +41,7 @@ class TransactionController extends Controller
         ]);
         $validatedData['user_id'] = Auth::id();
         try {
-            // Create the category using validated data
+            // Create the 800.00category using validated data
             Transaction::create($validatedData);
 
             // Redirect with success message

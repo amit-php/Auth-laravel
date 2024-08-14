@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\IncomeController;
 use App\Http\Middleware\checkLogin;
 
 Route::get('/', function () {
@@ -31,6 +32,7 @@ Route::middleware([checkLogin::class])->group(function () {
     Route::get('/dashboard',[UserController::class,'dasbordpage'])->name('dashboard');
     Route::resource('type', CategoryController::class);
     Route::resource('expense', TransactionController::class);
+    Route::resource('income', IncomeController::class);
 });
 
 Route::get('news', function () {
