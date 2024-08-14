@@ -9,4 +9,9 @@ class Category extends Model
 {
     use HasFactory;
     protected $guarded = [];
+
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class, 'type'); // 'type' is the foreign key in the Transaction model
+    }
 }

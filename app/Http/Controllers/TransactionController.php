@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Transaction;
+use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TransactionController extends Controller
 {
@@ -12,7 +14,9 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        //
+       $user_Id = Auth::id();
+        $transactions = Transaction::with('category')->where('user_id','=',$user_Id)->get();
+        return view('admin.expense_list',compact('transactions')); 
     }
 
     /**
@@ -20,7 +24,8 @@ class TransactionController extends Controller
      */
     public function create()
     {
-        //
+        $categorys = Category::all();
+        return view('admin.add_expense',compact('categorys'));
     }
 
     /**
@@ -28,7 +33,25 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'amount' => 'required|numeric|min:0',
+            'date' => 'required|date',
+            'description' => 'required|string|max:255',
+            'type' => 'required|integer|exists:categories,id', // referencing the 'categories' table
+        ]);
+        $validatedData['user_id'] = Auth::id();
+        try {
+            // Create the category using validated data
+            Transaction::create($validatedData);
+
+            // Redirect with success message
+            return redirect()->route('expense.index')->with('success', 'Expenses added successfully.');
+
+        } catch (QueryException $e) {
+            // Handle query exception and redirect with error message
+            return redirect()->back()->withErrors(['name' => 'There is something problem.'])->withInput();
+        }
+    
     }
 
     /**

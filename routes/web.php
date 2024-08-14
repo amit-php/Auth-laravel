@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\TransactionController;
 use App\Http\Middleware\checkLogin;
 
 Route::get('/', function () {
@@ -29,6 +30,7 @@ Route::post('logout', [UserController::class,'logout'])->name('logout');
 Route::middleware([checkLogin::class])->group(function () {
     Route::get('/dashboard',[UserController::class,'dasbordpage'])->name('dashboard');
     Route::resource('type', CategoryController::class);
+    Route::resource('expense', TransactionController::class);
 });
 
 Route::get('news', function () {
