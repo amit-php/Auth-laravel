@@ -10,33 +10,38 @@
             </div>
         </div>
     
-        <table class="table table-striped table-hover" id="transactionsTable">
+        <table class="table table-striped table-hover">
             <thead class="thead-dark">
                 <tr>
-                    <th scope="col">Description</th>
+                    <th scope="col">Sr no.</th>
                     <th scope="col">Date</th>
-                    <th scope="col">Expense Type</th>
-                    <th scope="col">Amount</th>
+                    <th scope="col">Income</th>
+                    <th scope="col">Expense</th>
+                    <th scope="col">Blance</th>
+                    <th scope="col">Action</th>
                 </tr>
             </thead>
             
             <tbody id="expenseTable">
                 <!-- Sample Data Row -->
-                @foreach ($transactions as $item)
+                {{-- @foreach ($result as $item)
+    <p>Date: {{ $item['date'] }}</p>
+    <p>Month: {{ $item['month'] }}</p>
+    <p>Total Income: {{ $item['total_income'] }}</p>
+    <p>Total Expense: {{ $item['total_expense'] }}</p>
+    <p>Balance: {{ $item['balance'] }}</p>
+    <hr>
+@endforeach --}}
+                 @foreach ($result as $k=>$item)
                 <tr>
-                    <td>{{$item->description}}</td>
-                    <td>{{$item->date}}</td>
-                    <td>{{ $item->category ? $item->category->name : 'N/A' }}</td>
-                    <td>{{$item->amount}}</td>
-                </tr>
+                    <td>{{++$k}}</td>
+                    <td>{{$item['date']}}</td>
+                    <td>{{$item['total_income']}}</td>
+                    <td>{{ $item['total_expense']}}</td>
+                    <td>{{$item['balance']}}</td>
+                    <td> <a href="{{ route('expense.show', ['expense' =>$item['date'] ]) }}?e={{ $item['total_expense'] }}&in={{ $item['total_income'] }}" class="btn btn-warning btn-sm">View details</a><td>
+                    </tr>
                 @endforeach
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <th>Total:</th>
-                    <th>Rs. 255</th>
-                 
-                </tr>
                 <!-- Repeat the rows as needed or dynamically generate with PHP/Blade -->
             </tbody>
         </table>

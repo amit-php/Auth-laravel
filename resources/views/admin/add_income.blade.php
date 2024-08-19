@@ -27,7 +27,29 @@
                 </form>
             </div>
             <!-- Category List Column -->
-            
+            <div class="col-md-6">
+                <h1>Income List</h1>
+
+                <!-- Example Category List -->
+                <ul class="list-group">
+                    <!-- Example category items -->
+                    @foreach ($incomesList as $category)
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        {{ $category->income }}
+                        <span>{{ $category->date}}</span>
+                        <span>
+                            
+                            <a href="{{ route('income.edit', $category->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                            <form action="{{ route('income.destroy', $category->id) }}" method="POST" style="display: inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this category?');">Delete</button>
+                            </form>
+                        </span>
+                    </li>
+                @endforeach
+                </ul>
+            </div>
         </div>
         </div>
 </x-layout-admin>

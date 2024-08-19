@@ -32,6 +32,9 @@ Route::middleware([checkLogin::class])->group(function () {
     Route::get('/dashboard',[UserController::class,'dasbordpage'])->name('dashboard');
     Route::resource('type', CategoryController::class);
     Route::resource('expense', TransactionController::class);
+    // Custom route with additional parameters
+//Route::get('expense/{date}/{income}', [TransactionController::class, 'show']);
+
     Route::resource('income', IncomeController::class);
 });
 
